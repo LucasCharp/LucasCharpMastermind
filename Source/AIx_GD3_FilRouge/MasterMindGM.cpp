@@ -90,9 +90,22 @@ bool AMasterMindGM::CheckAnswer(TArray<uint8> Answer)
 		}
 	}
 
+	
 	for (uint8 i = 0; i < 4; i++)
 	{
-		UE_LOG(LogTemp,Warning,TEXT("First element: %d"), AnswerState[i]);
+		UMaterialInterface* BaseMaterial = RefRowSpheres[i]->GetMaterial(0);
+		UMaterialInstanceDynamic* DynMaterial = UMaterialInstanceDynamic::Create(BaseMaterial, this);
+		UE_LOG(LogTemp,Warning,TEXT("First element: %d"), AnswerState[i]); //Juste pour voir dans le debug avant
+		if (AnswerState[i] == 1)
+		{
+			DynMaterial->SetVectorParameterValue("Color", FLinearColor::Red);
+			RefRowSpheres[i]->SetMaterial(0, DynMaterial);
+		}
+		if (AnswerState[i] == 2)
+		{
+			DynMaterial->SetVectorParameterValue("Color", FLinearColor::Green);
+			RefRowSpheres[i]->SetMaterial(0, DynMaterial);
+		}
 	}
 	return result;
 }

@@ -24,6 +24,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AActor*> PlayerSpheres;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UStaticMeshComponent*> RowSpheres;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -35,4 +38,6 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void Clicked();
+	UFUNCTION(BlueprintCallable)
+	void SetRefForManager();
 };

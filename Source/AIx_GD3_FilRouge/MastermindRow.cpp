@@ -17,7 +17,15 @@ AMastermindRow::AMastermindRow()
 void AMastermindRow::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	FTimerHandle TimerHandle;
+
+	GetWorld()->GetTimerManager().SetTimer(
+		TimerHandle,
+		this,
+		&AMastermindRow::SetRefForManager, // La fonction à appeler
+		0.1f,                             // Le délai en secondes
+		false                             // Ne pas répéter (false = une seule fois)
+	);
 }
 
 // Called every frame
@@ -36,5 +44,14 @@ void AMastermindRow::Clicked()
 		Answer[i] = PlayerSpheres[i]->GetComponentByClass<UMastermindSphere>()->GetSphereColor();
 	}
 	Manager->CheckAnswer(Answer);
+}
+
+void AMastermindRow::SetRefForManager()
+{
+	Manager->RefRowSpheres.SetNum(4);
+	for (uint8 i = 0; i < 4; i++)
+	{
+		Manager->RefRowSpheres[i] = RowSpheres[i];
+	}
 }
 

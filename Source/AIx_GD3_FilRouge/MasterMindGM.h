@@ -16,14 +16,16 @@ public:
 	// Sets default values for this actor's properties
 	AMasterMindGM();
 
-	UPROPERTY()
-	FOnSolutionChecked* OnSolutionChecked;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category="Settings")
 	TArray<FLinearColor> Colors {FLinearColor::Red,FLinearColor::Yellow,FLinearColor::Green,FLinearColor::Blue,FLinearColor::Gray,FLinearColor::White};
 
 	UPROPERTY(EditAnywhere)
 	TArray<uint8> Solution;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UStaticMeshComponent*> RefRowSpheres;
 	
 protected:
 	// Called when the game starts or when spawned
